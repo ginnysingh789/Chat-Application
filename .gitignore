@@ -1,0 +1,31 @@
+# === GLOBAL IGNORES ===
+
+# Node modules (common for frontend & backend)
+**/node_modules/
+
+# Build output (like dist or build folders)
+**/dist/
+**/build/
+
+# Environment variables
+**/.env
+
+# Log files
+**/*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE/editor folders
+.vscode/
+.idea/
+*.swp
+
+# === FRONTEND SPECIFIC ===
+frontend/.next/
+frontend/.parcel-cache/
+frontend/.turbo/
+
+# === BACKEND SPECIFIC ===
+backened/*.tsbuildinfo
