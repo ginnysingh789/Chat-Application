@@ -1,18 +1,17 @@
-import { Socket } from "dgram";
+
 import { WebSocketServer,WebSocket } from "ws";
 const wss = new WebSocketServer({ port: 5000 })
-
 interface userScheme{
     socket:WebSocket,
     roomId:string
 }
 let allConnectedUser:userScheme[]=[]
-try {
+
     wss.on("connection", function (socket) {    
        
         //First Join the room
         socket.on("message",(message)=>{
-            try {
+         
                 const parsedObject=JSON.parse(message as unknown as string)//Web socket recieve only string
             if(parsedObject.type==="join")
             {
@@ -45,20 +44,9 @@ try {
                 {
                     console.log("Entry not found ");
                 }
-
             }
-                
-            } catch (error) {
-                console.log(error)
-                
-            }
-            
         })
     })
 
-    } catch (error) {
-        console.log(error)
-
-    }
 
 
