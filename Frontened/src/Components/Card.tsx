@@ -1,9 +1,10 @@
-
-import { Button } from "./Button";
-
- export const Card = ({children}:any) => {
+import { ReactNode } from "react";
+type cardProps={
+  children:ReactNode
+}
+ export const Card = ({children}:cardProps) => {
     return (
-      <div className="w-80 bg-white rounded-xl shadow-md p-4">
+      <div className=" bg-white rounded-xl shadow-md p-4">
         {/* Header */}
         {children}
 

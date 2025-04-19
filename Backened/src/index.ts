@@ -5,6 +5,7 @@ interface userScheme{
     socket:WebSocket,
     roomId:string
 }
+let totalUser=0;
 let allConnectedUser:userScheme[]=[]
 
     wss.on("connection", function (socket) {    
@@ -12,11 +13,15 @@ let allConnectedUser:userScheme[]=[]
         //First Join the room
         socket.on("message",(message)=>{
          
-                const parsedObject=JSON.parse(message as unknown as string)//Web socket recieve only string
+                const parsedObject=JSON.parse(message as unknown as string)//Web socket 
+                // recieve only string
+                
             if(parsedObject.type==="join")
             {
                 allConnectedUser.push({socket:socket,roomId:parsedObject.payload.roomId})
                 console.log("User Connected")
+                totalUser=totalUser+1;
+                console.log(totalUser)
             }
             //After sending the room send the message
             if(parsedObject.type==="chat")

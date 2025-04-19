@@ -1,16 +1,17 @@
 
+import { Routes ,Route} from 'react-router-dom'
 import './App.css'
 import { HomePage } from './Components/HomePage'
-
-
-function App() {
-
-  return(
-  <div>
-  <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-      <HomePage />
-    </div>
-  </div>)
+import { CreateRoom } from './Components/CreateRoom'
+import { JoinRoom } from './Components/JoinRoom'
+export const App=()=> {
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage/>}></Route>
+     <Route path="/Create" element={<CreateRoom />} /> 
+     <Route path="/Join" element={<JoinRoom />} /> 
+    </Routes>
+  )
 }
 
-export default App
+
