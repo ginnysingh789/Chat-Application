@@ -2,10 +2,10 @@
 import { Button } from "./Button";
 import { Card } from "./Card";
 import { useEffect, useState,useRef } from "react";
-import { JoinRoom } from "./JoinRoom";
-import { sortUserPlugins } from "vite";
 
 export const CreateRoom = () => {
+  const [userCount,setuserCount]=useState<number>(0);
+  
     const SocketRef=useRef<WebSocket|null>(null);
     const [createCode, setCreateCode] = useState<string | null>(null);
     const [text, setText] = useState<string>("");
@@ -27,10 +27,20 @@ export const CreateRoom = () => {
       const socket=new WebSocket("ws://localhost:5000")
       console.log("Connection establish to socket")
       SocketRef.current=socket;
+
       socket.onopen=()=>{
         const joinMessage={"type":"join","payload":{"roomId":value}}
         socket.send(JSON.stringify(joinMessage))
-      }},
+      }
+      socket.onmessage=(event)=>{
+        const message=JSON.parse(event.data);
+        if(message.type==='user-count')
+        {
+          setuserCount(message.payload.count)
+        }
+      }
+    },
+      
        []);
        //For Sending messages
        const sendMessageToServer=()=>{
@@ -40,15 +50,14 @@ export const CreateRoom = () => {
         SocketRef.current?.send(JSON.stringify(SendMessage))
         }
        }
-     
-        
+       
   
     return (
       <div className="flex justify-center  h-screen w-full fixed  p-4 bg-slate-400">
         <Card>
           <div className="flex flex-col gap-4 p-8 w-screen ">
             <div className="flex justify-between text-lg font-medium">
-              <div>User Count: 0</div>
+              <div>User Count: {userCount}</div>
               <div>
                 Room Code: <span className="text-blue-600">{createCode}</span>
               </div>

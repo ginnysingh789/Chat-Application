@@ -1,4 +1,5 @@
 
+import { json } from "stream/consumers";
 import { WebSocketServer,WebSocket } from "ws";
 const wss = new WebSocketServer({ port: 5000 })
 interface userScheme{
@@ -22,6 +23,8 @@ let allConnectedUser:userScheme[]=[]
                 console.log("User Connected")
                 totalUser=totalUser+1;
                 console.log(totalUser)
+                socket.send(JSON.stringify({type:"user-count",payload:{count:totalUser}}))
+
             }
             //After sending the room send the message
             if(parsedObject.type==="chat")
