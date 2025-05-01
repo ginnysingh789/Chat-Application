@@ -54,6 +54,11 @@ let allConnectedUser:userScheme[]=[]
                 }
             }
         })
+       socket.on("close",()=>{
+        console.log("User Disconneted");
+        allConnectedUser=allConnectedUser.filter(user=>user.socket!=socket)
+        
+       })
     })
 
 
