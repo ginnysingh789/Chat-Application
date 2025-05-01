@@ -43,7 +43,7 @@ let allConnectedUser:userScheme[]=[]
                 {
                     for(let i =0;i<allConnectedUser.length;i++)
                     {
-                        if(CurrentUserRoom==allConnectedUser[i].roomId){
+                        if(CurrentUserRoom==allConnectedUser[i].roomId&& allConnectedUser[i].socket!==socket){
                             allConnectedUser[i].socket.send(parsedObject.payload.message)
                         }
                     }
